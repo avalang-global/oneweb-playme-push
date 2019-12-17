@@ -1,7 +1,7 @@
-package com.adobe.phonegap.push;
+package com.avalant.playme.push;
 
 public interface PushConstants {
-  public static final String COM_ADOBE_PHONEGAP_PUSH = "com.adobe.phonegap.push";
+  public static final String COM_AVALANT_PLAYME_PUSH = "com.avalant.playme.push";
   public static final String REGISTRATION_ID = "registrationId";
   public static final String REGISTRATION_TYPE = "registrationType";
   public static final String FOREGROUND = "foreground";

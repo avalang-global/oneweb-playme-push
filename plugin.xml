@@ -7,8 +7,8 @@
   <name>PlayMe plugin push</name>
   <description>    This plugin allows your application to receive push notifications on Android, iOS and Windows devices.    Android uses Firebase Cloud Messaging.    iOS uses Apple APNS Notifications.    Windows uses Microsoft WNS Notifications.  </description>
   <license>MIT</license>
-  <js-module src="www/push.js" name="PushNotification">
-    <clobbers target="PushNotification"/>
+  <js-module src="www/playmePush.js" name="PushNotification">
+    <clobbers target="PlaymePushNotification"/>
   </js-module>
   <engines>
     <engine name="cordova" version=">=7.1.0"/>
@@ -18,7 +18,7 @@
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="PushNotification">
-        <param name="android-package" value="com.adobe.phonegap.push.PushPlugin"/>
+        <param name="android-package" value="com.avalant.playme.push.PushPlugin"/>
       </feature>
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -28,15 +28,15 @@
       <uses-permission android:name="android.permission.VIBRATE"/>
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
-      <activity android:name="com.adobe.phonegap.push.PushHandlerActivity" android:exported="true" android:permission="${applicationId}.permission.PushHandlerActivity"/>
-      <receiver android:name="com.adobe.phonegap.push.BackgroundActionButtonHandler"/>
-      <receiver android:name="com.adobe.phonegap.push.PushDismissedHandler"/>
-      <service android:name="com.adobe.phonegap.push.FCMService">
+      <activity android:name="com.avalant.playme.push.PushHandlerActivity" android:exported="true" android:permission="${applicationId}.permission.PushHandlerActivity"/>
+      <receiver android:name="com.avalant.playme.push.BackgroundActionButtonHandler"/>
+      <receiver android:name="com.avalant.playme.push.PushDismissedHandler"/>
+      <service android:name="com.avalant.playme.push.FCMService">
         <intent-filter>
           <action android:name="com.google.firebase.MESSAGING_EVENT"/>
         </intent-filter>
       </service>
-      <service android:name="com.adobe.phonegap.push.PushInstanceIDListenerService">
+      <service android:name="com.avalant.playme.push.PushInstanceIDListenerService">
         <intent-filter>
           <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
         </intent-filter>
@@ -49,16 +49,16 @@
     <framework src="com.google.firebase:firebase-messaging:$FCM_VERSION"/>
     <dependency id="cordova-support-google-services" version="~1.3.1"/>
     <dependency id="phonegap-plugin-multidex" version="~1.0.0"/>
-    <source-file src="src/android/com/adobe/phonegap/push/FCMService.java" target-dir="src/com/adobe/phonegap/push/"/>
-    <source-file src="src/android/com/adobe/phonegap/push/PushConstants.java" target-dir="src/com/adobe/phonegap/push/"/>
-    <source-file src="src/android/com/adobe/phonegap/push/PushHandlerActivity.java" target-dir="src/com/adobe/phonegap/push/"/>
-    <source-file src="src/android/com/adobe/phonegap/push/PushInstanceIDListenerService.java" target-dir="src/com/adobe/phonegap/push/"/>
-    <source-file src="src/android/com/adobe/phonegap/push/PushPlugin.java" target-dir="src/com/adobe/phonegap/push/"/>
-    <source-file src="src/android/com/adobe/phonegap/push/BackgroundActionButtonHandler.java" target-dir="src/com/adobe/phonegap/push/"/>
-    <source-file src="src/android/com/adobe/phonegap/push/PushDismissedHandler.java" target-dir="src/com/adobe/phonegap/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/FCMService.java" target-dir="src/com/avalant/playme/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/PushConstants.java" target-dir="src/com/avalant/playme/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/PushHandlerActivity.java" target-dir="src/com/avalant/playme/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/PushInstanceIDListenerService.java" target-dir="src/com/avalant/playme/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/PushPlugin.java" target-dir="src/com/avalant/playme/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/BackgroundActionButtonHandler.java" target-dir="src/com/avalant/playme/push/"/>
+    <source-file src="src/android/com/avalant/playme/push/PushDismissedHandler.java" target-dir="src/com/avalant/playme/push/"/>
   </platform>
   <platform name="browser">
-    <js-module src="www/browser/push.js" name="BrowserPush">
+    <js-module src="www/browser/playmePush.js" name="BrowserPush">
       <clobbers target="PushNotification"/>
     </js-module>
     <asset src="src/browser/ServiceWorker.js" target="ServiceWorker.js"/>

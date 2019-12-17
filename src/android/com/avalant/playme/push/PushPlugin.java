@@ -1,4 +1,4 @@
-package com.adobe.phonegap.push;
+package com.avalant.playme.push;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -181,7 +181,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
           JSONObject jo = null;
 
           Log.v(LOG_TAG, "execute: data=" + data.toString());
-          SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH,
+          SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_AVALANT_PLAYME_PUSH,
               Context.MODE_PRIVATE);
           String token = null;
           String senderID = null;
@@ -294,7 +294,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
       cordova.getThreadPool().execute(new Runnable() {
         public void run() {
           try {
-            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH,
+            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(COM_AVALANT_PLAYME_PUSH,
                 Context.MODE_PRIVATE);
             JSONArray topics = data.optJSONArray(0);
             if (topics != null && !"".equals(registration_id)) {
@@ -522,7 +522,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
     super.onPause(multitasking);
     gForeground = false;
 
-    SharedPreferences prefs = getApplicationContext().getSharedPreferences(COM_ADOBE_PHONEGAP_PUSH,
+    SharedPreferences prefs = getApplicationContext().getSharedPreferences(COM_AVALANT_PLAYME_PUSH,
         Context.MODE_PRIVATE);
     if (prefs.getBoolean(CLEAR_NOTIFICATIONS, true)) {
       clearAllNotifications();

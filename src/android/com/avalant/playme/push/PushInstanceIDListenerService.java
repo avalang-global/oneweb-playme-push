@@ -1,4 +1,4 @@
-package com.adobe.phonegap.push;
+package com.avalant.playme.push;
 
 import android.content.Intent;
 import android.content.Context;
@@ -21,6 +21,6 @@ public class PushInstanceIDListenerService extends FirebaseInstanceIdService imp
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(LOG_TAG, "Refreshed token: " + refreshedToken);
         // TODO: Implement this method to send any registration to your app's servers.
-        //sendRegistrationToServer(refreshedToken);
+        // sendRegistrationToServer(refreshedToken);
     }
 }

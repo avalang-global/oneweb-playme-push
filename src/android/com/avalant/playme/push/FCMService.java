@@ -1,4 +1,4 @@
-package com.adobe.phonegap.push;
+package com.avalant.playme.push;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -90,7 +90,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     if (extras != null && isAvailableSender(from)) {
       Context applicationContext = getApplicationContext();
 
-      SharedPreferences prefs = applicationContext.getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH,
+      SharedPreferences prefs = applicationContext.getSharedPreferences(PushPlugin.COM_AVALANT_PLAYME_PUSH,
           Context.MODE_PRIVATE);
       boolean forceShow = prefs.getBoolean(FORCE_SHOW, false);
       boolean clearBadge = prefs.getBoolean(CLEAR_BADGE, false);
@@ -110,7 +110,8 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
         extras.putBoolean(COLDSTART, false);
         PushPlugin.sendExtras(extras);
       }
-      // if we are in the foreground and forceShow is `true`, force show the notification if the data has at least a message or title
+      // if we are in the foreground and forceShow is `true`, force show the
+      // notification if the data has at least a message or title
       else if (forceShow && PushPlugin.isInForeground()) {
         Log.d(LOG_TAG, "foreground force");
         extras.putBoolean(FOREGROUND, true);
@@ -118,13 +119,15 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
 
         showNotificationIfPossible(applicationContext, extras);
       }
-      // if we are not in the foreground always send notification if the data has at least a message or title
+      // if we are not in the foreground always send notification if the data has at
+      // least a message or title
       else {
-        /*Log.d(LOG_TAG, "background");
-        extras.putBoolean(FOREGROUND, false);
-        extras.putBoolean(COLDSTART, PushPlugin.isActive());
-
-        showNotificationIfPossible(applicationContext, extras);*/
+        /*
+         * Log.d(LOG_TAG, "background"); extras.putBoolean(FOREGROUND, false);
+         * extras.putBoolean(COLDSTART, PushPlugin.isActive());
+         * 
+         * showNotificationIfPossible(applicationContext, extras);
+         */
 
         extras.putBoolean(FOREGROUND, true);
         extras.putBoolean(COLDSTART, false);
@@ -237,7 +240,8 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
 
       Log.d(LOG_TAG, "key = " + key);
 
-      // If normalizeKeythe key is "data" or "message" and the value is a json object extract
+      // If normalizeKeythe key is "data" or "message" and the value is a json object
+      // extract
       // This is to support parse.com and other services. Issue #147 and pull #218
       if (key.equals(PARSE_COM_DATA) || key.equals(MESSAGE) || key.equals(messageKey)) {
         Object json = extras.get(key);
@@ -424,7 +428,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
         .setTicker(fromHtml(extras.getString(TITLE))).setContentIntent(contentIntent).setDeleteIntent(deleteIntent)
         .setAutoCancel(true);
 
-    SharedPreferences prefs = context.getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
+    SharedPreferences prefs = context.getSharedPreferences(PushPlugin.COM_AVALANT_PLAYME_PUSH, Context.MODE_PRIVATE);
     String localIcon = prefs.getString(ICON, null);
     String localIconColor = prefs.getString(ICON_COLOR, null);
     boolean soundOption = prefs.getBoolean(SOUND, true);
@@ -443,8 +447,8 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     /*
      * Notification Icon Color
      *
-     * Sets the small-icon background color of the notification.
-     * To use, add the `iconColor` key to plugin android options
+     * Sets the small-icon background color of the notification. To use, add the
+     * `iconColor` key to plugin android options
      *
      */
     setNotificationIconColor(extras.getString(COLOR), mBuilder, localIconColor);
@@ -454,11 +458,11 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
      *
      * Sets the small-icon of the notification.
      *
-     * - checks the plugin options for `icon` key
-     * - if none, uses the application icon
+     * - checks the plugin options for `icon` key - if none, uses the application
+     * icon
      *
-     * The icon value must be a string that maps to a drawable resource.
-     * If no resource is found, falls
+     * The icon value must be a string that maps to a drawable resource. If no
+     * resource is found, falls
      *
      */
     setNotificationSmallIcon(context, extras, packageName, resources, mBuilder, localIcon);
@@ -468,11 +472,9 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
      *
      * Sets the large-icon of the notification
      *
-     * - checks the gcm data for the `image` key
-     * - checks to see if remote image, loads it.
-     * - checks to see if assets image, Loads It.
-     * - checks to see if resource image, LOADS IT!
-     * - if none, we don't set the large icon
+     * - checks the gcm data for the `image` key - checks to see if remote image,
+     * loads it. - checks to see if assets image, Loads It. - checks to see if
+     * resource image, LOADS IT! - if none, we don't set the large icon
      *
      */
     setNotificationLargeIcon(extras, packageName, resources, mBuilder);
@@ -485,12 +487,12 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     }
 
     /*
-     *  LED Notification
+     * LED Notification
      */
     setNotificationLedColor(extras, mBuilder);
 
     /*
-     *  Priority Notification
+     * Priority Notification
      */
     setNotificationPriority(extras, mBuilder);
 
@@ -505,7 +507,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     setNotificationCount(context, extras, mBuilder);
 
     /*
-     *  Notification ongoing
+     * Notification ongoing
      */
     setNotificationOngoing(extras, mBuilder);
 
@@ -725,10 +727,8 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
         mBuilder.setStyle(bigText);
       }
       /*
-      else {
-          mBuilder.setContentText("<missing message content>");
-      }
-      */
+       * else { mBuilder.setContentText("<missing message content>"); }
+       */
     }
   }
 
@@ -943,7 +943,7 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
   }
 
   private boolean isAvailableSender(String from) {
-    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH,
+    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PushPlugin.COM_AVALANT_PLAYME_PUSH,
         Context.MODE_PRIVATE);
     String savedSenderID = sharedPref.getString(SENDER_ID, "");
 
